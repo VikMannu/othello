@@ -1,4 +1,4 @@
-# Problema de las N-Reinas con Heurística de Mínimo de Conflictos
+# Problema de Othello con Minimax, Minimax con Poda Alfa Beta, y un agentebasado en Reinforcement Learning
 ## Integrantes del Grupo
 - Romina Alfonso
 - Victor Ayala
