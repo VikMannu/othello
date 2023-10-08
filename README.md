@@ -18,5 +18,5 @@ El juego continúa alternando turnos entre los jugadores, y cada jugador debe re
 ## Instalación y Ejecución
 1. Clona el repositorio desde GitHub:
 ```bash
-git clone https://github.com/VikMannu/n-queens-GUI.git
+git clone https://github.com/VikMannu/othello.git
 ```
