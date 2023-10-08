@@ -1,4 +1,4 @@
-# Problema de Othello con Minimax, Minimax con Poda Alfa Beta, y un agentebasado en Reinforcement Learning
+# Problema de Othello con Minimax, Minimax con Poda Alfa Beta, y un agente basado en Reinforcement Learning
 ## Integrantes del Grupo
 - Romina Alfonso
 - Victor Ayala
@@ -13,15 +13,10 @@ El tablero comienza con cuatro fichas colocadas en el centro de manera diagonal,
 El juego continúa alternando turnos entre los jugadores, y cada jugador debe realizar una jugada válida en su turno. El juego termina cuando no se pueden realizar más movimientos válidos, lo que suele ocurrir cuando el tablero está completamente lleno o cuando ninguno de los jugadores puede realizar movimientos legales. En ese momento, se cuentan las fichas de cada jugador en el tablero, y el jugador con más fichas de su color gana.
 
 ## Requerimientos
-- Xcode (versión 14 o superior)
-- Dispositivo iOS o simulador de iOS
+- Python 3.9.6
 
 ## Instalación y Ejecución
 1. Clona el repositorio desde GitHub:
 ```bash
 git clone https://github.com/VikMannu/n-queens-GUI.git
 ```
-2. Abre el proyecto en Xcode.
-3. Selecciona el simulador de iOS o conecta tu dispositivo iOS.
-4. Presiona el botón de "Build and Run" en Xcode para compilar y ejecutar la aplicación en el simulador o dispositivo.
-5. Sigue las instrucciones en la aplicación para resolver el problema de las N-Reinas utilizando la heurística de Mínimo de Conflictos.
