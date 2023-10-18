@@ -1,6 +1,6 @@
 # Problema de Othello con Minimax, Minimax con Poda Alfa Beta, y un agente basado en Reinforcement Learning
 ## Integrantes del Grupo
-- Romina Alfonso
+- Romina Alfonzo
 - Victor Ayala
 - Alejandro Notario
 - Cristhian Ortellado
