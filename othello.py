@@ -76,6 +76,15 @@ def find_valid_moves(board, player):
     return valid_moves
 
 
+def can_play(board, player):
+    valid_moves = find_valid_moves(board, player)
+    return len(valid_moves) > 0
+
+
+def is_game_over(board):
+    return not (can_play(board, BLACK) or can_play(board, WHITE))
+
+
 # Realizar un movimiento y voltear fichas del oponente
 def make_move(board, row, col, player):
     if not is_valid_move(board, row, col, player):

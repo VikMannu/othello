@@ -106,3 +106,5 @@ if __name__ == '__main__':
     min_max = MinMax(8, 1000000, False)
     othello = Othello()
     print(min_max.run(othello.board, BLACK))
+
+    can_play,
