@@ -28,20 +28,29 @@ class Othello:
         current_player = BLACK
         while not is_game_over(self.board):
             player = "Black" if current_player == BLACK else "White"
-            print(f"Current player: {player}")
-            self.print_board()
-            print('---------------')
             if current_player == WHITE:
                 can_play, _, time_elapsed, nodes, row, col = min_max_white.run(self.board, current_player)
                 if can_play:
+                    print(f"\n\nCurrent player: {player}")
+                    print(f"Board received")
+                    self.print_board()
+                    print('---------------')
                     make_move(self.board, row, col, current_player)
+                    print(f"Board played -> Row: {row}, Col{col}")
+                    self.print_board()
                     current_player = get_opponent(current_player)
                 else:
                     current_player = get_opponent(current_player)
             else:
                 can_play, _, time_elapsed, nodes, row, col = min_max_black.run(self.board, current_player)
                 if can_play:
+                    print(f"\n\nCurrent player: {player}")
+                    print(f"Board received")
+                    self.print_board()
+                    print('---------------')
                     make_move(self.board, row, col, current_player)
+                    print(f"Board played -> Row: {row}, Col{col}")
+                    self.print_board()
                     current_player = get_opponent(current_player)
                 else:
                     current_player = get_opponent(current_player)
