@@ -1,6 +1,7 @@
-from othello import *
 import time
 import copy
+
+from othello_utils import *
 
 
 class MinMax:
@@ -101,10 +102,3 @@ class MinMax:
         else:
             return True, True, end_time - self.start_time, self.nodes, row, col
 
-
-if __name__ == '__main__':
-    min_max = MinMax(8, 1000000, False)
-    othello = Othello()
-    print(min_max.run(othello.board, BLACK))
-
-    can_play,
