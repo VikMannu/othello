@@ -49,7 +49,7 @@ class Othello:
                     self.print_board()
                     print('---------------')
                     make_move(self.board, row, col, current_player)
-                    print(f"Board played -> Row: {row}, Col: {col}")
+                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}")
                     self.print_board()
                     current_player = get_opponent(current_player)
                 else:
