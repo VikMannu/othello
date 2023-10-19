@@ -1,3 +1,5 @@
+import copy
+
 BOARD_SIZE = 8
 
 # Definir los posibles valores en el tablero
@@ -6,11 +8,15 @@ WHITE = 1
 BLACK = 2
 
 
+def get_opponent(player):
+    return WHITE if player == BLACK else BLACK
+
+
 def is_valid_move(board, row, col, player):
     if board[row][col] != EMPTY:
         return False
 
-    opponent = WHITE if player == BLACK else BLACK
+    opponent = get_opponent(player)
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
 
     for dr, dc in directions:
@@ -36,7 +42,7 @@ def is_valid_move(board, row, col, player):
 
 def find_valid_moves(board, player):
     valid_moves = []
-    opponent = WHITE if player == BLACK else BLACK
+    opponent = get_opponent(player)
 
     for row in range(BOARD_SIZE):
         for col in range(BOARD_SIZE):
@@ -75,7 +81,7 @@ def make_move(board, row, col, player):
     if not is_valid_move(board, row, col, player):
         return False
 
-    opponent = WHITE if player == BLACK else BLACK
+    opponent = get_opponent(player)
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
 
     for dr, dc in directions:
@@ -137,8 +143,8 @@ if __name__ == '__main__':
     movements = find_valid_moves(othello.board, WHITE)
     print(find_valid_moves(othello.board, WHITE))
 
-    if movements:
-        row, col = movements[0]
-        print(row, col)
-        print(make_move(othello.board, row, col, WHITE))
+    for row, col in movements:
+        new_board = copy.deepcopy(othello.board)
+        print(f"Row: {row}, Col: {col}")
+        print(make_move(new_board, row, col, WHITE))
         print_board(othello.board)
