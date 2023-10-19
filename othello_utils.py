@@ -116,6 +116,20 @@ def make_move(board, row, col, player):
     return True
 
 
+def check_winner(board):
+    # Count the number of pieces of each color on the board
+    white_pieces = sum([row.count(WHITE) for row in board])
+    black_pieces = sum([row.count(BLACK) for row in board])
+
+    # Determine the winner
+    if white_pieces > black_pieces:
+        return "White"
+    elif black_pieces > white_pieces:
+        return "Black"
+    else:
+        return "Draw"
+
+
 # Imprimir el tablero
 def print_board(board):
     for i in range(BOARD_SIZE):
