@@ -1,9 +1,9 @@
 BOARD_SIZE = 8
 
 # Definir los posibles valores en el tablero
-EMPTY = 0
-WHITE = 1
-BLACK = 2
+EMPTY = '-'
+WHITE = 'W'
+BLACK = 'B'
 
 
 def get_opponent(player):
