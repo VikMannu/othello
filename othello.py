@@ -23,8 +23,10 @@ class Othello:
     # Verificar si un movimiento es válido
 
     def play_test_min_max(self):
-        min_max_black = MinMax(4, 100, False)
-        min_max_white = MinMax(16, 100, True)
+        # Si es alto el cutting y el tiempo es el mismo se nota cuantos nodos se visitan
+        # Sin alpha beta usan siempre su max_cutting_time
+        min_max_black = MinMax(10, 50, False)
+        min_max_white = MinMax(10, 50, True)
         current_player = BLACK
         while not is_game_over(self.board):
             player = "Black" if current_player == BLACK else "White"
