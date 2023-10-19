@@ -38,7 +38,8 @@ class Othello:
                     self.print_board()
                     print('---------------')
                     make_move(self.board, row, col, current_player)
-                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}, Visited Nodes: {nodes}")
+                    print(
+                        f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}, Visited Nodes: {nodes}")
                     self.print_board()
                     current_player = get_opponent(current_player)
                 else:
@@ -51,13 +52,15 @@ class Othello:
                     self.print_board()
                     print('---------------')
                     make_move(self.board, row, col, current_player)
-                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}, Visited Nodes: {nodes}")
+                    print(
+                        f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}, Visited Nodes: {nodes}")
                     self.print_board()
                     current_player = get_opponent(current_player)
                 else:
                     current_player = get_opponent(current_player)
 
         print(f"The winner is: {check_winner(self.board)}")
+
 
 if __name__ == '__main__':
     othello = Othello()
