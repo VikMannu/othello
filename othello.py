@@ -23,7 +23,7 @@ class Othello:
     # Verificar si un movimiento es válido
 
     def play_test_min_max(self):
-        min_max_black = MinMax(8, 10, False)
+        min_max_black = MinMax(4, 10, False)
         min_max_white = MinMax(8, 10, True)
         current_player = BLACK
         while not is_game_over(self.board):
@@ -59,4 +59,3 @@ class Othello:
 if __name__ == '__main__':
     othello = Othello()
     othello.play_test_min_max()
-    othello.print_board()
