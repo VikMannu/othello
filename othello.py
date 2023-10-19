@@ -23,8 +23,8 @@ class Othello:
     # Verificar si un movimiento es válido
 
     def play_test_min_max(self):
-        min_max_black = MinMax(4, 10, False)
-        min_max_white = MinMax(16, 10, True)
+        min_max_black = MinMax(4, 100, False)
+        min_max_white = MinMax(16, 100, True)
         current_player = BLACK
         while not is_game_over(self.board):
             player = "Black" if current_player == BLACK else "White"
@@ -36,7 +36,7 @@ class Othello:
                     self.print_board()
                     print('---------------')
                     make_move(self.board, row, col, current_player)
-                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}")
+                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}, Visited Nodes: {nodes}")
                     self.print_board()
                     current_player = get_opponent(current_player)
                 else:
@@ -49,7 +49,7 @@ class Othello:
                     self.print_board()
                     print('---------------')
                     make_move(self.board, row, col, current_player)
-                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}")
+                    print(f"Board played -> Row: {row}, Col: {col}, Time Elapsed: {time_elapsed}, Visited Nodes: {nodes}")
                     self.print_board()
                     current_player = get_opponent(current_player)
                 else:
