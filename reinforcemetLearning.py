@@ -8,24 +8,18 @@ from othello import *
 from othello_utils import *
 
 # Definición de constantes
-NUM_EPISODES = 1000
+NUM_EPISODES = 10000
 LEARNING_RATE = 0.1
 DISCOUNT_FACTOR = 0.9
 EPSILON = 0.1
 gan_black = 0
 gan_white = 0
-position_weight = [
-    [100, -20, 10, 5, 5, 10, -20, 100],
-    [-20, -50, -2, -2, -2, -2, -50, -20],
-    [10, -2, 2, 1, 1, 2, -2, 10],
-    [5, -2, 1, 1, 1, 1, -2, 5],
-    [5, -2, 1, 1, 1, 1, -2, 5],
-    [10, -2, 2, 1, 1, 2, -2, 10],
-    [-20, -50, -2, -2, -2, -2, -50, -20],
-    [100, -20, 10, 5, 5, 10, -20, 100]
-]
+
+# Configuración del juego
+num_states = 8 * 8  # 8x8 tablero
+num_actions = 64  # 64 posibles movimientos
 # Inicialización de la tabla Q
-Q = np.zeros((BOARD_SIZE, BOARD_SIZE, BOARD_SIZE, BOARD_SIZE, 3))
+Q = np.zeros((num_states, num_actions))
 
 
 # Función para elegir una acción (movimiento) con base en la política epsilon-greedy
@@ -55,34 +49,33 @@ def evaluate_board(board, player):
     for row in range(BOARD_SIZE):
         for col in range(BOARD_SIZE):
             if board[row][col] == player:
-                player_weight += position_weight[row][col]
+                player_weight += 1
             if board[row][col] == opponent:
-                opponent_weight += position_weight[row][col]
+                opponent_weight += 1
     return player_weight - opponent_weight
 
 
 # Función para actualizar la tabla Q
-def update_Q(Q, state, action, reward, next_state):
+def update_Q(state, action, reward, next_state):
+    act=action[0] * 8 + action[1]
     numeric_matrix = np.array([[1 if char == WHITE else 2 if char == BLACK else 0 for char in row] for row in state])
     numeric_matrix_next = np.array(
         [[1 if char == WHITE else 2 if char == BLACK else 0 for char in row] for row in next_state])
+    # Actualiza la tabla Q según la regla de actualización Q-learning
 
-    disc = np.multiply(DISCOUNT_FACTOR, np.max(Q[numeric_matrix_next]))
-    subs = np.subtract(disc, Q[numeric_matrix][action])
-    suma = np.add(reward, subs)
-    lr = np.multiply(LEARNING_RATE, suma)
-    jiji = np.add(Q[numeric_matrix][action], lr)
-    Q[numeric_matrix][action] = np.add(Q[numeric_matrix][action], lr)
-    # print(LEARNING_RATE," REWARD: ",  reward, "DISCOUNT:", DISCOUNT_FACTOR, "npMax: ", np.max(Q[numeric_matrix_next]))
-    # print("Suma np:",jiji.shape)
+    current_q = Q[numeric_matrix, act]
+    max_future_q = np.max(Q[numeric_matrix_next, :])
+    new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (
+                reward + DISCOUNT_FACTOR * max_future_q)
+    Q[numeric_matrix, act] = new_q
+   # print(Q[numeric_matrix, act], new_q)
+    #os.system("pause")
 
-    m = Q[numeric_matrix][action]
-    # print(m.shape)
 
 
 # Función para entrenar al agente
 def train_agent():
-    loadLearningTable()
+    #loadLearningTable()
     # division de epocas
     for episode in range(NUM_EPISODES):
 
@@ -100,13 +93,14 @@ def train_agent():
 
                 reward = evaluate_board(next_state, player)
 
-                update_Q(Q, state, action, reward, next_state)
+                update_Q(state, action, reward, next_state)
                 state = next_state
                 # print("Juega ", player, "Pos ", action[0], "-", action[1])
             done = is_game_over(board)
             player = next_player
         saveLearningTable()
-        print("Gana", check_winner(board))
+        #print(Q)
+        #print("Gana", check_winner(board))
 
 
 def loadLearningTable():
@@ -129,13 +123,13 @@ def saveLearningTable():
 def train_min_max():
     global gan_white
     global gan_black
-    loadLearningTable()
+    #loadLearningTable()
     for episode in range(NUM_EPISODES):
         othello = Othello()
         board = othello.board
         state = np.copy(board)
         player = BLACK
-        min_max_white = MinMax(2, 50, True)
+        min_max_white = MinMax(2, 60, True)
         while True:
             # print("Estado actual del tablero:")
             # print_board(board)
@@ -146,7 +140,7 @@ def train_min_max():
                     col = coord[1]
                     next_state = board
                     reward = evaluate_board(next_state, player)
-                    update_Q(Q, state, coord, reward, next_state)
+                    update_Q( state, coord, reward, next_state)
                     state = next_state
                     # print(f"El agente juega en ({row + 1}, {col + 1})")
                 else:
@@ -160,13 +154,15 @@ def train_min_max():
                 # print("El juego ha terminado.")
                 break
         print("Gana", check_winner(board))
+        # print_board(board)
+        # os.system("pause")
         if check_winner(board) == "Black":
             gan_black += 1
         elif check_winner(board) == "White":
             gan_white += 1
         saveLearningTable()
 
-    print("Estadishticas: \nBlack", gan_black, "\nWhite", gan_white)
+    print("Estadisticas: \nBlack", gan_black, "\nWhite", gan_white)
 
 
 if __name__ == "__main__":
